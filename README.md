@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# [https://mindpeace.now.sh](Mindpeace)
 
-## Available Scripts
+![./Assets/logo@128.png](Mind Peace Logo)
 
-In the project directory, you can run:
+Unintrusive mind calm application
 
-### `npm start`
+## About
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Mind Peace is the meditation app that allows you to meditate without stumbling in your way.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Just hit play and start meditating
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technique
 
-### `npm run build`
+To use Mind Peace, simply go to the website (or, if you are here, deploy your own version) and hit play. Alternatively you can change the total duration of the meditation session.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+As soon as the session start, you will hear a relaxing rain music and a gong sound when every phase finish.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Just close your eyes, enjoy the sound and follow each phase:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Settle in. Feel the weight of your body against the chair, the coach or the floor.
+2. Deep Breath. Breath in through your nose and out through your mouth. Let flow any thinking.
+3. Let your breath return to its natural flow. 
+4. Get back to your space.
+5. Open your eyes.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Though this is a suggested approach, you can really use each phase as you want.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Development
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This project used [https://github.com/facebook/create-react-app](create-react-app) as a starting boilerplate.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Credits
 
-## Learn More
+### Rain music
+* Recorded by: Pwlae
+* Original Source: http://soundbible.com/1999-Rain.html
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Gong sound
+* Recorded by: Dianakc 
+* Original Source: http://soundbible.com/2062-Metal-Gong-1.html
