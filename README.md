@@ -1,6 +1,6 @@
-# [https://mindpeace.now.sh](Mindpeace)
+# [Mind Peace](https://mindpeace.now.sh)
 
-![./Assets/logo@128.png](Mind Peace Logo)
+![Mind Peace Logo](/Assets/logo@128.png)
 
 Unintrusive mind calm application
 
