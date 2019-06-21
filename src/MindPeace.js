@@ -1,9 +1,9 @@
 import React from 'react';
-import { meditate } from '../Model/session';
+import { meditate } from './Model/session';
 import { useState, useEffect } from 'react';
-import Circle from './Circle';
 
-import styled from 'styled-components';
+import Circle from './Components/Circle';
+import {Wrapper, StartButton, TimeInput, Title} from './Components/UI';
 
 const phases = [
     10,
@@ -13,14 +13,6 @@ const phases = [
   ];
 
 const defaultTime = 10;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f3eef2;
-`
 
 const MindPeace = () => {
 
@@ -52,6 +44,7 @@ const MindPeace = () => {
   
     session.onMeditationFinished(() => { 
       musicPlayer.pause();
+      setCurrent(null);
     });
   
     session.onPhaseFinished(() => {
@@ -61,21 +54,23 @@ const MindPeace = () => {
   }, [gongPlayer, musicPlayer, session, current]);
 
   return <Wrapper>
+    <Title>Mind Peace</Title>
     <Circle colors={[ 
       "#a4ceff",
       "#b0d4ff",
       "#bbdaff",
      "#c6e0ff",
     ]} phases={session.phases} current={current} started={isMeditating} />
-   
-    <button onClick={onMeditationButtonClick}>
+
+    <TimeInput hide={isMeditating} type="number" onInput={onTimeChanged} defaultValue={defaultTime} step="5" max="30" min="10" />
+
+    <StartButton onClick={onMeditationButtonClick}>
       {
         isMeditating 
           ? 'stop'
           : 'start'
       }
-    </button>
-    <input disabled={isMeditating} type="number" onInput={onTimeChanged} defaultValue={defaultTime} step="5" />
+    </StartButton>
     <audio loop ref={setMusicPlayer} src="/static/rain.wav" />
     <audio ref={setGongPlayer} src="/static/gong.wav" />
   </Wrapper>

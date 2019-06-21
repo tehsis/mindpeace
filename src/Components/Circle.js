@@ -13,9 +13,9 @@ const scaleOut = keyframes`
 
 const Circle =styled.div`
     position: absolute;
-    bottom: 55vh;
-    width: 10rem;
-    height: 10rem;
+    top: 50vh;
+    width: 20rem;
+    height: 20rem;
     background-color: ${({color}) => color};
     border-radius: 100%;
     transform: scale(0);
