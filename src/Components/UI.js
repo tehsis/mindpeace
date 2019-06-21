@@ -1,14 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 
-const phases = [
-    10,
-    20,
-    60,
-    10
-  ];
-
-const defaultTime = 10;
-
 export const Title = styled.h1`
   position: sticky;
   visibility: ${({hide}) => hide ? 'hidden' : 'visible'};

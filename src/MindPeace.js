@@ -37,18 +37,27 @@ const MindPeace = () => {
 
   useEffect(() => {
     session.onMeditationStarted(() => {  
-      musicPlayer.load();
-      musicPlayer.play();
+      try {
+        musicPlayer.load();
+        musicPlayer.play();
+      } catch(e) {
+        // iOS and maybe other browsers won't allow to play sounds without a user interaction.
+      }
       setCurrent(0);
     });
   
     session.onMeditationFinished(() => { 
-      musicPlayer.pause();
+      try {
+        musicPlayer.pause();
+      } catch (e) {}
+
       setCurrent(null);
     });
   
     session.onPhaseFinished(() => {
-      gongPlayer.play();
+      try {
+        gongPlayer.play();
+      } catch(e) {}
       setCurrent(current+1);
     });
   }, [gongPlayer, musicPlayer, session, current]);
