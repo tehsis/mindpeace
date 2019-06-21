@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const phases = [
     10,
@@ -11,6 +11,7 @@ const defaultTime = 10;
 
 export const Title = styled.h1`
   position: sticky;
+  visibility: ${({hide}) => hide ? 'hidden' : 'visible'};
   font-family: Arial, Helvetica, sans-serif;
   top: 5rem;
   font-size: 6rem;
@@ -41,7 +42,8 @@ export const TimeInput = styled.input`
 `;
 
 export const StartButton = styled.button`
-position: relative;
+  position: relative;
+  visibility: ${({hide}) => hide ? 'hidden' : 'visible'};
   background-color: transparent;
   border: none;
   font-weight: bold;

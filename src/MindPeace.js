@@ -54,8 +54,8 @@ const MindPeace = () => {
   }, [gongPlayer, musicPlayer, session, current]);
 
   return <Wrapper>
-    <Title>Mind Peace</Title>
-    <Circle colors={[ 
+    <Title hide={isMeditating}>Mind Peace</Title>
+    <Circle onClick={onMeditationButtonClick} colors={[ 
       "#a4ceff",
       "#b0d4ff",
       "#bbdaff",
@@ -64,13 +64,7 @@ const MindPeace = () => {
 
     <TimeInput hide={isMeditating} type="number" onInput={onTimeChanged} defaultValue={defaultTime} step="5" max="30" min="10" />
 
-    <StartButton onClick={onMeditationButtonClick}>
-      {
-        isMeditating 
-          ? 'stop'
-          : 'start'
-      }
-    </StartButton>
+    <StartButton hide={isMeditating} onClick={onMeditationButtonClick}>start</StartButton>
     <audio loop ref={setMusicPlayer} src="/static/rain.wav" />
     <audio ref={setGongPlayer} src="/static/gong.wav" />
   </Wrapper>

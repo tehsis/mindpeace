@@ -13,6 +13,7 @@ const scaleOut = keyframes`
 
 const Circle =styled.div`
     position: absolute;
+    cursor: pointer;
     top: 50vh;
     width: 20rem;
     height: 20rem;
@@ -29,16 +30,16 @@ const CompletedCircle = styled(Circle)`
   transform: scale(1);
 `;
 
-const CircleComponent = ({phases, current, colors}) =>  {
+const CircleComponent = ({phases, current, colors, onClick}) =>  {
     return <>
-        <CompletedCircle color="#83bcff" />
+        <CompletedCircle onClick={onClick} color="#83bcff" />
         {phases.map((phase, index) => {
          if (current === index) {
-             return <GoingCircle key={index} duration={phase} color={colors[index]} /> 
+             return <GoingCircle  onClick={onClick} key={index} duration={phase} color={colors[index]} /> 
          }
 
          if (current > index) {
-            return <CompletedCircle key={index} color={colors[index] } />
+            return <CompletedCircle  onClick={onClick} key={index} color={colors[index] } />
          }
     
          return null
