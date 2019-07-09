@@ -3,7 +3,7 @@ import { meditate } from './Model/session';
 import { useState, useEffect } from 'react';
 
 import Circle from './Components/Circle';
-import {Wrapper, StartButton, TimeInput, Title} from './Components/UI';
+import { Wrapper, StartButton, GlobalStyle, Footer } from './Components/UI';
 
 const phases = [
     10,
@@ -14,18 +14,24 @@ const phases = [
 
 const defaultTime = 10;
 
+const session = meditate({phases, minutes: defaultTime});
+
+
 const MindPeace = () => {
-
   const [musicPlayer, setMusicPlayer] = useState(null);
-  const [gongPlayer, setGongPlayer] = useState(null);
-
-  const [session, setSession] = useState(meditate({phases, minutes: defaultTime}));
   const [current, setCurrent] = useState(null);
   const [isMeditating, setIsMeditating] = useState(false);
 
-  const onTimeChanged = ({target}) => setSession(meditate({ phases, minutes: target.value }));
+  const onMeditationButtonClick = () => {
+    if (isMeditating) {
+      musicPlayer.pause();
+    } else {
+      musicPlayer.play();
+    }
+  };
 
-  const onMeditationButtonClick = () => setIsMeditating(!isMeditating);
+  const onMusicPlayerStarted = () => setIsMeditating(true);
+  const onMusicPlayerStoped = () => setIsMeditating(false);
 
   useEffect(() => {
     if (isMeditating) {
@@ -33,16 +39,10 @@ const MindPeace = () => {
     } else {
       session.stop();
     }
-  }, [isMeditating, session])
+  }, [isMeditating])
 
   useEffect(() => {
-    session.onMeditationStarted(() => {  
-      try {
-        musicPlayer.load();
-        musicPlayer.play();
-      } catch(e) {
-        // iOS and maybe other browsers won't allow to play sounds without a user interaction.
-      }
+    session.onMeditationStarted(() => { 
       setCurrent(0);
     });
   
@@ -55,28 +55,27 @@ const MindPeace = () => {
     });
   
     session.onPhaseFinished(() => {
-      try {
-        gongPlayer.play();
-      } catch(e) {}
       setCurrent(current+1);
     });
-  }, [gongPlayer, musicPlayer, session, current]);
+  }, [musicPlayer, current]);
 
-  return <Wrapper>
-    <Title hide={isMeditating}>Mind Peace</Title>
-    <Circle onClick={onMeditationButtonClick} colors={[ 
-      "#a4ceff",
-      "#b0d4ff",
-      "#bbdaff",
-     "#c6e0ff",
-    ]} phases={session.phases} current={current} started={isMeditating} />
+  return <> 
+      <GlobalStyle />
 
-    <TimeInput hide={isMeditating} type="number" onInput={onTimeChanged} defaultValue={defaultTime} step="5" max="30" min="10" />
+    <Wrapper>
+      <Circle onClick={onMeditationButtonClick} colors={[ 
+        "#a4ceff",
+        "#b0d4ff",
+        "#bbdaff",
+      "#c6e0ff",
+      ]} phases={session.phases} current={current} started={isMeditating} />
 
-    <StartButton hide={isMeditating} onClick={onMeditationButtonClick}>start</StartButton>
-    <audio loop ref={setMusicPlayer} src="/static/rain.wav" />
-    <audio ref={setGongPlayer} src="/static/gong.wav" />
-  </Wrapper>
+     <StartButton hide={isMeditating} onClick={onMeditationButtonClick}>start</StartButton>
+      <audio onPlaying={onMusicPlayerStarted} onPause={onMusicPlayerStoped} ref={setMusicPlayer} src="/static/10MinSession.mp3" />
+    
+      <Footer>by <a href="https://github.com/tehsis">Tehsis</a></Footer>
+    </Wrapper>
+  </>
 } 
 
 export default MindPeace;

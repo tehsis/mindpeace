@@ -1,39 +1,18 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
-export const Title = styled.h1`
-  position: sticky;
-  visibility: ${({hide}) => hide ? 'hidden' : 'visible'};
-  font-family: Arial, Helvetica, sans-serif;
-  top: 5rem;
-  font-size: 6rem;
-  color: #4d76a5;
-`;
-
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f3eef2;
+export const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #f3eef2;
+  }
 `
 
-export const TimeInput = styled.input`
-  position: relative;
-  visibility: ${({hide}) => hide ? 'hidden' : 'visible'};
-  background-color: transparent;
-  border: none;
-  margin-top: 3rem;
-  font-weight: bold;
-  height: 5rem;
-  text-align: right;
-  font-size: 3rem;
-  width: 5rem;
-  color: #7e8895;
-`;
-
+export const Wrapper = styled.div`
+`
 export const StartButton = styled.button`
-  position: relative;
+  position: absolute;
+  display: block;
+  top: 50%;
+  transform: translateY(-50%);
   visibility: ${({hide}) => hide ? 'hidden' : 'visible'};
   background-color: transparent;
   border: none;
@@ -42,11 +21,18 @@ export const StartButton = styled.button`
   color: #4d76a5;
   font-size: 3rem;
   cursor: pointer;
-  width: 10rem;
+  width: 100%;
   height: 5rem;
   letter-spacing: 0.2rem;
   &:hover {
-    background-color: #4d76a5;
     color: #f3eef2;
   }
 `;
+
+
+export const Footer = styled.div`
+  position: fixed;
+  bottom: 1.5rem;
+  width: 100%;
+  text-align: center;
+`

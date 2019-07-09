@@ -3,23 +3,24 @@ import styled, { keyframes }  from 'styled-components';
 
 const scaleOut = keyframes`
   from {
-      transform: scale(0)
+      transform: translate(-50%, -50%) scale(0)
   }
 
   to {
-      transform: scale(1)
+      transform: translate(-50%, -50%) scale(1)
   };
 `
 
-const Circle =styled.div`
+const Circle = styled.div`
     position: absolute;
     cursor: pointer;
-    top: 50vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 20rem;
     height: 20rem;
     background-color: ${({color}) => color};
     border-radius: 100%;
-    transform: scale(0);
 `;
 
 const GoingCircle = styled(Circle)`
@@ -27,7 +28,7 @@ const GoingCircle = styled(Circle)`
 `;
 
 const CompletedCircle = styled(Circle)`
-  transform: scale(1);
+  transform:  translate(-50%, -50%); scale(1);
 `;
 
 const CircleComponent = ({phases, current, colors, onClick}) =>  {
