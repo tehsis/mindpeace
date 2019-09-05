@@ -36,6 +36,7 @@ export function register(config) {
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
+        console.log('is localhost');
         checkValidServiceWorker(swUrl, config);
 
         // Add some additional logging to localhost, pointing developers to the
@@ -47,6 +48,7 @@ export function register(config) {
           );
         });
       } else {
+        console.log('not valid');
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
       }
@@ -55,16 +57,23 @@ export function register(config) {
 }
 
 function registerValidSW(swUrl, config) {
+  console.log('registering valid sw');
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      console.log('seems registered');
       registration.onupdatefound = () => {
+        console.log('update found, uh');
         const installingWorker = registration.installing;
         if (installingWorker == null) {
+          console.log('already installing, uh');
           return;
         }
         installingWorker.onstatechange = () => {
+          console.log('state changed. uh');
           if (installingWorker.state === 'installed') {
+            console.log('state changed and the state is installed. uh');
+
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
@@ -76,6 +85,7 @@ function registerValidSW(swUrl, config) {
 
               // Execute callback
               if (config && config.onUpdate) {
+                console.log('lets execute the update callback');
                 config.onUpdate(registration);
               }
             } else {
@@ -86,6 +96,7 @@ function registerValidSW(swUrl, config) {
 
               // Execute callback
               if (config && config.onSuccess) {
+                console.log('lets call the success thingy')
                 config.onSuccess(registration);
               }
             }
@@ -100,14 +111,18 @@ function registerValidSW(swUrl, config) {
 
 function checkValidServiceWorker(swUrl, config) {
   // Check if the service worker can be found. If it can't reload the page.
+  console.log('fetching sw');
   fetch(swUrl)
     .then(response => {
       // Ensure service worker exists, and that we really are getting a JS file.
+      console.log('got response');
+
       const contentType = response.headers.get('content-type');
       if (
         response.status === 404 ||
         (contentType != null && contentType.indexOf('javascript') === -1)
       ) {
+        console.log('no sw');
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister().then(() => {
@@ -115,6 +130,7 @@ function checkValidServiceWorker(swUrl, config) {
           });
         });
       } else {
+        console.log('register valid sw');
         // Service worker found. Proceed as normal.
         registerValidSW(swUrl, config);
       }

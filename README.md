@@ -35,8 +35,8 @@ This project used [https://github.com/facebook/create-react-app](create-react-ap
 ## Credits
 
 ### Rain music
-* Recorded by: Pwlae
-* Original Source: http://soundbible.com/1999-Rain.html
+* Recorded by: Mark DiAngelo
+* Original Source: http://soundbible.com/2065-Rain-Inside-House.html
 
 ### Gong sound
 * Recorded by: Dianakc 

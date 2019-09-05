@@ -17,15 +17,17 @@ const defaultTime = 10;
 const session = meditate({phases, minutes: defaultTime});
 
 
-const MindPeace = () => {
+const MindPeace = ({loaded}) => {
   const [musicPlayer, setMusicPlayer] = useState(null);
   const [current, setCurrent] = useState(null);
   const [isMeditating, setIsMeditating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const onMeditationButtonClick = () => {
     if (isMeditating) {
       musicPlayer.pause();
     } else {
+      setIsMeditating(true);
       musicPlayer.play();
     }
   };
@@ -33,13 +35,21 @@ const MindPeace = () => {
   const onMusicPlayerStarted = () => setIsMeditating(true);
   const onMusicPlayerStoped = () => setIsMeditating(false);
 
-  useEffect(() => {
+  const onMusicPlayerCanPlayThrough = () => {
     if (isMeditating) {
+      session.start();
+    }
+
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    if (isMeditating && !isLoading) {
       session.start();
     } else {
       session.stop();
     }
-  }, [isMeditating])
+  }, [isMeditating, isLoading]);
 
   useEffect(() => {
     session.onMeditationStarted(() => { 
@@ -59,20 +69,28 @@ const MindPeace = () => {
     });
   }, [musicPlayer, current]);
 
+  useEffect(() => {
+    try {
+      if (musicPlayer.readyState >= 4) {
+        setIsLoading(false);
+      }
+    } catch (e) {}
+  }, [musicPlayer]);
+
   return <> 
       <GlobalStyle />
-
     <Wrapper>
-      <Circle onClick={onMeditationButtonClick} colors={[ 
-        "#a4ceff",
-        "#b0d4ff",
-        "#bbdaff",
-      "#c6e0ff",
-      ]} phases={session.phases} current={current} started={isMeditating} />
-
-     <StartButton hide={isMeditating} onClick={onMeditationButtonClick}>start</StartButton>
-      <audio onPlaying={onMusicPlayerStarted} onPause={onMusicPlayerStoped} ref={setMusicPlayer} src="/static/10MinSession.mp3" />
-    
+       <Circle onClick={onMeditationButtonClick} colors={[ 
+          "#a4ceff",
+          "#b0d4ff",
+          "#bbdaff",
+          "#c6e0ff",
+        ]} phases={session.phases} current={current} started={isMeditating} />
+  
+      <StartButton hide={isMeditating} onClick={onMeditationButtonClick}>{isLoading && isMeditating ? "loading..." : "start"}</StartButton>
+      <audio onPlaying={onMusicPlayerStarted} onCanPlayThrough={onMusicPlayerCanPlayThrough} onPause={onMusicPlayerStoped} ref={setMusicPlayer} src="/static/10MinSession.mp3" />
+        
+      
       <Footer>by <a href="https://github.com/tehsis">Tehsis</a></Footer>
     </Wrapper>
   </>
